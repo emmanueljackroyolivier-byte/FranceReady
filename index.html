@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FranceReady</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#0d1b2a;--cream:#f5f0e8;--gold:#c9a84c;--gold-light:#e8d5a3;--blue-mid:#1a3a5c;--soft-white:#fdfaf4;--text-dark:#1a1a2e;--text-muted:#6b7280;--section-bg:#f9f6ef}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--soft-white);color:var(--text-dark);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5vw;background:rgba(13,27,42,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.2)}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--cream)}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(245,240,232,0.75);text-decoration:none;font-size:0.88rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:0.5rem 1.3rem;border-radius:2rem;font-weight:600!important}
+.hero{min-height:100vh;background:var(--navy);position:relative;display:flex;align-items:center;overflow:hidden;padding:7rem 5vw 5rem}
+.hero-bg{position:absolute;inset:0;background-image:radial-gradient(circle at 80% 20%,rgba(201,168,76,0.12) 0%,transparent 50%),radial-gradient(circle at 10% 80%,rgba(26,58,92,0.6) 0%,transparent 50%)}
+.hero-flag{position:absolute;top:0;right:0;bottom:0;width:28%;display:flex}
+.fl-b{flex:1;background:rgba(0,35,149,0.15)}
+.fl-w{flex:1;background:rgba(255,255,255,0.04)}
+.fl-r{flex:1;background:rgba(237,41,57,0.12)}
+.hero-content{position:relative;z-index:2;max-width:680px}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.35);color:var(--gold-light);padding:0.4rem 1rem;border-radius:2rem;font-size:0.8rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1.8rem;animation:fadeUp 0.8s ease both}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);line-height:1.08;color:var(--cream);font-weight:900;margin-bottom:1.5rem;animation:fadeUp 0.8s 0.15s ease both}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-desc{font-size:1.1rem;color:rgba(245,240,232,0.72);line-height:1.75;max-width:520px;margin-bottom:2.5rem;font-weight:300;animation:fadeUp 0.8s 0.3s ease both}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.8s 0.45s ease both}
+.btn-primary{background:var(--gold);color:var(--navy);padding:0.9rem 2rem;border-radius:3rem;text-decoration:none;font-weight:600;font-size:0.95rem;border:2px solid var(--gold);transition:all 0.25s;display:inline-flex;align-items:center;gap:0.5rem}
+.btn-primary:hover{background:transparent;color:var(--gold);transform:translateY(-2px)}
+.btn-secondary{color:var(--cream);padding:0.9rem 2rem;border-radius:3rem;text-decoration:none;font-weight:500;font-size:0.95rem;border:1.5px solid rgba(245,240,232,0.3);transition:all 0.25s;display:inline-flex;align-items:center;gap:0.5rem}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-stats{position:absolute;right:5vw;bottom:4rem;display:flex;gap:2.5rem;z-index:2;animation:fadeUp 0.8s 0.6s ease both}
+.stat{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);font-weight:700;line-height:1}
+.stat-label{font-size:0.75rem;color:rgba(245,240,232,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.3rem}
+section{padding:6rem 5vw}
+.sec-label{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--gold);font-weight:600;margin-bottom:0.8rem}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:var(--navy);line-height:1.15;margin-bottom:1rem}
+.sec-sub{font-size:1.05rem;color:var(--text-muted);max-width:560px;line-height:1.75;font-weight:300}
+.services-section{background:var(--section-bg)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3.5rem}
+.service-card{background:white;border-radius:1.2rem;padding:2rem 1.8rem;border:1px solid rgba(201,168,76,0.15);transition:all 0.3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(13,27,42,0.1);border-color:var(--gold)}
+.service-card:hover::before{transform:scaleX(1)}
+.svc-icon{width:52px;height:52px;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border-radius:0.8rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.3rem;border:1px solid rgba(201,168,76,0.2)}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy);margin-bottom:0.7rem}
+.service-card p{font-size:0.9rem;color:var(--text-muted);line-height:1.7}
+.svc-tag{display:inline-block;margin-top:1rem;font-size:0.72rem;color:var(--gold);background:rgba(201,168,76,0.1);padding:0.25rem 0.75rem;border-radius:2rem;font-weight:600;text-transform:uppercase;letter-spacing:0.07em}
+.about-section{background:var(--navy);color:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.profile-card-frame{background:linear-gradient(135deg,var(--blue-mid),var(--navy));border:1px solid rgba(201,168,76,0.25);border-radius:1.5rem;padding:2.5rem;text-align:center;position:relative;overflow:hidden}
+.profile-card-frame::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(201,168,76,0.2),transparent 70%);border-radius:50%}
+.profile-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--navy);font-weight:900;margin:0 auto 1.2rem;border:3px solid rgba(201,168,76,0.4)}
+.profile-name{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--cream);font-weight:700;margin-bottom:0.3rem}
+.profile-title{font-size:0.85rem;color:var(--gold-light);margin-bottom:1.5rem}
+.profile-tags{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center}
+.profile-tag{background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.2);color:var(--gold-light);padding:0.3rem 0.85rem;border-radius:2rem;font-size:0.75rem;font-weight:500}
+.exp-items{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+.exp-item{display:flex;align-items:flex-start;gap:0.8rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.12);border-radius:0.8rem;padding:0.9rem 1rem}
+.exp-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.exp-text{font-size:0.85rem;color:rgba(245,240,232,0.75);line-height:1.5}
+.exp-text strong{color:var(--gold-light);font-weight:600;display:block;margin-bottom:0.15rem}
+.about-content .sec-title{color:var(--cream)}
+.about-content p{color:rgba(245,240,232,0.72);line-height:1.8;margin-top:1.2rem;font-weight:300}
+.creds{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.cred{display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:rgba(245,240,232,0.6)}
+.cred::before{content:'✦';color:var(--gold);font-size:0.7rem}
+.journey-section{background:var(--soft-white)}
+.timeline{margin-top:3.5rem;position:relative;max-width:700px}
+.timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),rgba(201,168,76,0.1))}
+.t-step{display:flex;gap:2rem;margin-bottom:2.5rem;position:relative}
+.t-dot{width:58px;height:58px;flex-shrink:0;background:white;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative;z-index:2;box-shadow:0 4px 15px rgba(201,168,76,0.2)}
+.t-body{padding-top:0.8rem}
+.t-num{font-size:0.72rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.3rem}
+.t-body h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);font-weight:700;margin-bottom:0.5rem}
+.t-body p{font-size:0.9rem;color:var(--text-muted);line-height:1.7}
+.why-section{background:var(--section-bg)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3.5rem}
+.why-card{background:white;border-radius:1.2rem;padding:2rem;border:1px solid rgba(201,168,76,0.12);transition:all 0.3s}
+.why-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,27,42,0.08)}
+.why-num{font-family:'Playfair Display',serif;font-size:3.5rem;color:rgba(201,168,76,0.2);line-height:1;font-weight:900;margin-bottom:0.3rem}
+.why-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);font-weight:700;margin-bottom:0.7rem}
+.why-card p{font-size:0.88rem;color:var(--text-muted);line-height:1.7}
+.contact-section{background:var(--navy);text-align:center;padding:7rem 5vw}
+.contact-section .sec-title{color:var(--cream)}
+.contact-desc{color:rgba(245,240,232,0.65);font-size:1.05rem;max-width:500px;margin:1rem auto 3rem;line-height:1.8;font-weight:300}
+.contact-cards{display:flex;justify-content:center;flex-wrap:wrap;gap:1.2rem;margin-bottom:2.5rem}
+.contact-card{background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:1rem;padding:1.3rem 1.8rem;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:0.8rem;font-size:0.9rem;font-weight:500;transition:all 0.25s;min-width:200px;justify-content:center}
+.contact-card:hover{background:rgba(201,168,76,0.15);border-color:var(--gold);transform:translateY(-3px)}
+.c-icon{font-size:1.3rem}
+.cta-final{display:inline-flex;align-items:center;gap:0.6rem;background:var(--gold);color:var(--navy);padding:1rem 2.5rem;border-radius:3rem;font-weight:700;font-size:1rem;text-decoration:none;transition:all 0.25s}
+.cta-final:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 12px 30px rgba(201,168,76,0.3)}
+footer{background:#080f18;padding:2rem 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(201,168,76,0.12)}
+.footer-logo{font-family:'Playfair Display',serif;color:var(--cream);font-size:1.1rem}
+.footer-logo span{color:var(--gold)}
+footer p{font-size:0.8rem;color:rgba(245,240,232,0.35)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.about-section{grid-template-columns:1fr;gap:3rem;padding:4rem 5vw}.nav-links{display:none}.hero-stats{position:static;margin-top:2.5rem}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">France<span>Ready</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#why">Why Me</a></li>
+    <li><a href="https://calendly.com/emmanueljackroyolivier/new-meeting" target="_blank" class="nav-cta">Book &mdash; &euro;3</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-flag"><div class="fl-b"></div><div class="fl-w"></div><div class="fl-r"></div></div>
+  <div class="hero-content">
+    <div class="hero-badge">&#127467;&#127479; Your trusted guide to France</div>
+    <h1>Your journey to <em>France</em><br>starts here.</h1>
+    <p class="hero-desc">From visa applications to settling in &mdash; I guide international students through every step of moving to France, so you can focus on your studies, not the stress.</p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/emmanueljackroyolivier/new-meeting" target="_blank" class="btn-primary">Book a Consultation &mdash; &euro;3 &#8599;</a>
+      <a href="#services" class="btn-secondary">See What I Offer</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years in France</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Master's Degrees</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Personalised</div></div>
+  </div>
+</section>
+
+<section class="services-section" id="services">
+  <div class="sec-label">What I Offer</div>
+  <h2 class="sec-title">Everything you need,<br>from application to arrival.</h2>
+  <p class="sec-sub">I handle the complexity so you can arrive in France with confidence &mdash; not confusion.</p>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#128706;</div>
+      <h3>Visa Application Guidance</h3>
+      <p>Step-by-step support with your student visa (VLS-TS), document checklist, appointment scheduling, and French consulate tips that actually work.</p>
+      <span class="svc-tag">Pre-Arrival</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#127963;</div>
+      <h3>Campus France Process</h3>
+      <p>I walk you through creating your Campus France account, completing your dossier, and preparing for the Campus France interview with confidence.</p>
+      <span class="svc-tag">Pre-Arrival</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#129517;</div>
+      <h3>University Consulting</h3>
+      <p>Choosing the right program can be overwhelming. I help you match your profile to French universities and grandes ecoles that fit your goals.</p>
+      <span class="svc-tag">Planning</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#9992;</div>
+      <h3>Airport Reception</h3>
+      <p>Don't arrive alone in an unfamiliar city. I personally receive you at the airport, help with transportation, and make sure your first day feels welcoming.</p>
+      <span class="svc-tag">On Arrival</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#127968;</div>
+      <h3>Accommodation Help</h3>
+      <p>Finding a room in France is notoriously difficult for new students. I guide you through CROUS applications, private rentals, and student residences.</p>
+      <span class="svc-tag">On Arrival</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#128241;</div>
+      <h3>SIM Card &amp; Phone Setup</h3>
+      <p>Get connected from day one. I guide you to the best affordable French phone plans and help you set up your number without the language barrier.</p>
+      <span class="svc-tag">On Arrival</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#127970;</div>
+      <h3>Bank Account Opening</h3>
+      <p>Opening a French bank account as an international student takes patience. I know exactly which banks are student-friendly and what documents you need.</p>
+      <span class="svc-tag">Settlement</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#128203;</div>
+      <h3>OFII &amp; Titre de Sejour</h3>
+      <p>After arrival, you must validate your visa with OFII and apply for a residence permit. I guide you through the entire administrative process.</p>
+      <span class="svc-tag">Settlement</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="svc-icon">&#127891;</div>
+      <h3>Student Life Orientation</h3>
+      <p>Transportation cards, student discounts, health insurance (CPAM), CAF housing aid &mdash; I make sure you access every benefit available to you.</p>
+      <span class="svc-tag">Settlement</span>
+    </div>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="about-visual fade-up">
+    <div class="profile-card-frame">
+      <div class="profile-avatar">E</div>
+      <div class="profile-name">Emmanuel J. R. Olivier</div>
+      <div class="profile-title">International Business &amp; Supply Chain Graduate &middot; Paris</div>
+      <div class="profile-tags">
+        <span class="profile-tag">&#127470;&#127475; India</span>
+        <span class="profile-tag">&#127467;&#127479; Paris</span>
+        <span class="profile-tag">Excelia Group</span>
+        <span class="profile-tag">Indie Campers</span>
+      </div>
+      <div class="exp-items">
+        <div class="exp-item">
+          <span class="exp-icon">&#127891;</span>
+          <div class="exp-text"><strong>Double Master's Degree</strong>International Business &amp; Sustainable Supply Chain &mdash; Excelia Group, France</div>
+        </div>
+        <div class="exp-item">
+          <span class="exp-icon">&#128188;</span>
+          <div class="exp-text"><strong>Operations &amp; Business Experience</strong>Internships at Indie Campers (France) and Cubert Traders (India)</div>
+        </div>
+        <div class="exp-item">
+          <span class="exp-icon">&#127758;</span>
+          <div class="exp-text"><strong>3+ Years Navigating France</strong>Visa, Campus France, housing, banking &mdash; done it all, twice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="about-content fade-up">
+    <div class="sec-label">About Me</div>
+    <h2 class="sec-title">I was once exactly where you are now.</h2>
+    <p>I moved from India to France with nothing but a stack of documents, a lot of hope, and zero idea what to expect. The bureaucracy was confusing, the language was a challenge, and finding housing felt impossible.</p>
+    <p>Three years later, I have two Master's degrees, international work experience in France, and a genuine passion for making that journey easier for every student who comes after me.</p>
+    <p>I know what it feels like to be overwhelmed. That's why I offer the kind of personalised, honest guidance I wish I had from day one.</p>
+    <div class="creds">
+      <div class="cred">MSc International Business Management</div>
+      <div class="cred">MSc Sustainable Global Supply Chain</div>
+      <div class="cred">English &amp; Tamil speaker, intermediate French</div>
+      <div class="cred">Based in Paris, France</div>
+      <div class="cred">Indian student community connections</div>
+    </div>
+  </div>
+</section>
+
+<section class="journey-section" id="how">
+  <div class="sec-label">The Process</div>
+  <h2 class="sec-title">How it works</h2>
+  <p class="sec-sub">A clear, structured journey from your home country to settling into student life in France.</p>
+  <div class="timeline">
+    <div class="t-step fade-up">
+      <div class="t-dot">&#128172;</div>
+      <div class="t-body"><div class="t-num">Step 01</div><h3>Initial Consultation</h3><p>We start with a call to understand your situation &mdash; your target school, visa status, and needs. Book via Calendly for just &euro;3.</p></div>
+    </div>
+    <div class="t-step fade-up">
+      <div class="t-dot">&#127963;</div>
+      <div class="t-body"><div class="t-num">Step 02</div><h3>Campus France &amp; University Application</h3><p>I walk you through choosing your program, building your dossier, and preparing for the Campus France interview.</p></div>
+    </div>
+    <div class="t-step fade-up">
+      <div class="t-dot">&#128196;</div>
+      <div class="t-body"><div class="t-num">Step 03</div><h3>Visa Application Support</h3><p>From gathering documents to booking your consulate appointment &mdash; I guide you through every requirement for your student visa.</p></div>
+    </div>
+    <div class="t-step fade-up">
+      <div class="t-dot">&#127968;</div>
+      <div class="t-body"><div class="t-num">Step 04</div><h3>Pre-Arrival Preparation</h3><p>While still at home, we prepare your accommodation search, plan your first week, and make sure you know exactly what to bring.</p></div>
+    </div>
+    <div class="t-step fade-up">
+      <div class="t-dot">&#9992;</div>
+      <div class="t-body"><div class="t-num">Step 05</div><h3>Welcome to France</h3><p>I receive you at the airport and accompany you to your accommodation. Your first day in France won't feel lonely or scary.</p></div>
+    </div>
+    <div class="t-step fade-up">
+      <div class="t-dot">&#127891;</div>
+      <div class="t-body"><div class="t-num">Step 06</div><h3>Full Settlement Support</h3><p>SIM card, bank account, OFII registration, CAF application, student card &mdash; I stay with you until you are fully settled.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why-section" id="why">
+  <div class="sec-label">Why FranceReady</div>
+  <h2 class="sec-title">Not an agency.<br>A fellow student who made it.</h2>
+  <p class="sec-sub">There's a difference between reading a guide online and talking to someone who actually lived it.</p>
+  <div class="why-grid">
+    <div class="why-card fade-up"><div class="why-num">01</div><h3>Real Experience, Not Theory</h3><p>I completed Campus France, got my visa, found housing, opened a bank account, and navigated OFII &mdash; all as an Indian student. I know what works.</p></div>
+    <div class="why-card fade-up"><div class="why-num">02</div><h3>Truly Personalised</h3><p>No generic checklists. Every student's situation is different. I tailor my guidance to your school, city, budget, and personal timeline.</p></div>
+    <div class="why-card fade-up"><div class="why-num">03</div><h3>I Speak Your Language</h3><p>Literally &mdash; I speak English and Tamil, and I understand the cultural shift of moving from South Asia to Europe. Talk to me like a friend.</p></div>
+    <div class="why-card fade-up"><div class="why-num">04</div><h3>End-to-End Support</h3><p>From your first Google search about France to the moment you walk into your first lecture &mdash; I am with you throughout the entire journey.</p></div>
+    <div class="why-card fade-up"><div class="why-num">05</div><h3>Paris-Based &amp; Available</h3><p>I am physically present in France and available to meet, accompany you to appointments, or simply grab a coffee when you need reassurance.</p></div>
+    <div class="why-card fade-up"><div class="why-num">06</div><h3>Academic Credibility</h3><p>With two Master's degrees from Excelia Group and international business experience, I understand the academic landscape and can guide you with authority.</p></div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="sec-label">Let's Connect</div>
+  <h2 class="sec-title">Ready to make your move?</h2>
+  <p class="contact-desc">Book a consultation and let's talk about your journey to France. Just &euro;3 for a 30-minute call &mdash; real advice from someone who has been through it.</p>
+  <div class="contact-cards">
+    <a href="https://www.linkedin.com/in/emmanueljack/" target="_blank" class="contact-card"><span class="c-icon">&#128279;</span>LinkedIn Profile</a>
+  </div>
+  <a href="https://calendly.com/emmanueljackroyolivier/new-meeting" target="_blank" class="cta-final">Book a Consultation &mdash; &euro;3 &#8599;</a>
+</section>
+
+<footer>
+  <div class="footer-logo">France<span>Ready</span></div>
+  <p>By Emmanuel J. R. Olivier &middot; Paris, France</p>
+  <p style="font-size:0.78rem;color:rgba(245,240,232,0.2)">Helping students find their path to France &#127467;&#127479;</p>
+</footer>
+
+<script>
+const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80)})},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
